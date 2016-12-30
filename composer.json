@@ -1,0 +1,23 @@
+{
+    "name": "jaxon-php/jaxon-cake",
+    "type": "library",
+    "description": "Jaxon library integration for the CakePHP 3 framework",
+    "authors": [
+        {"name": "Thierry Feuzeu"}
+    ],
+    "homepage": "https://github.com/jaxon-php/jaxon-cake",
+    "license": "BSD-2-Clause",
+    "keywords": ["Jaxon", "Xajax", "Ajax", "PHP", "Framework", "CakePHP"],
+    "support": {
+        "issues": "https://github.com/jaxon-php/jaxon-cake/issues",
+        "source": "https://github.com/jaxon-php/jaxon-cake"
+    },
+    "require": {
+        "jaxon-php/jaxon-core": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jaxon\\CI\\": "src/"
+        }
+    }
+}

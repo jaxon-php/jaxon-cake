@@ -1,2 +1,2 @@
 # jaxon-cake
-Jaxon plugin for the CakePHP framework
+Jaxon plugin for the CakePHP 3 framework
