@@ -1,12 +1,7 @@
 <?php
 
-use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\Router;
 
-Router::plugin(
-    'Jaxon',
-    ['path' => '/jaxon'],
-    function ($routes) {
-        // $routes->fallbacks(DashedRoute::class);
-    }
-);
+Router::plugin('Jaxon/Cake', ['path' => '/jaxon'], function ($routes) {
+    $routes->connect('/', ['controller' => 'Jaxon', 'action' => 'index']);
+});
