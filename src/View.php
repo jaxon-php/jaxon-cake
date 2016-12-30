@@ -5,12 +5,12 @@ namespace Jaxon\Cake;
 class View
 {
     protected $data;
-    protected $controller;
+    protected $view; // CakePHP View object
 
-    public function __construct($controller)
+    public function __construct($view)
     {
         $this->data = array();
-        $this->controller = $controller;
+        $this->view = $view;
     }
 
     /**
@@ -36,6 +36,6 @@ class View
      */
     public function render($template, array $data = array())
     {
-        return trim($this->controller->element($template, array_merge($this->data, $data)), "\n");
+        return trim($this->view->element($template, array_merge($this->data, $data)), "\n");
     }
 }

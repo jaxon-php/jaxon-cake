@@ -2,6 +2,9 @@
 
 namespace Jaxon\Cake\Controller\Component;
 
+use Jaxon\Config\Php as Config;
+use Jaxon\Cake\View;
+
 use Cake\Controller\Component;
 use Cake\Routing\Router;
 use Cake\Core\Configure;
@@ -56,7 +59,7 @@ class JaxonComponent extends Component
     {
         if($this->jaxonViewRenderer == null)
         {
-            $this->jaxonViewRenderer = new View();
+            $this->jaxonViewRenderer = new View($this->_registry->getController()->createView());
         }
         return $this->jaxonViewRenderer;
     }
