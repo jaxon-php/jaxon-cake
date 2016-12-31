@@ -18,7 +18,7 @@ Create the `composer.json` file into the installation dir with the following con
 ```json
 {
     "require": {
-        "jaxon-php/jaxon-cake": "dev-master",
+        "jaxon-php/jaxon-cake": "~2.0",
     }
 }
 ```
