@@ -53,6 +53,7 @@ The following options can be defined in the `app` section of the config file.
 
 | Name | Default value | Description |
 |------|---------------|-------------|
+| request.route | jaxon | The named route to the Jaxon request processor |
 | controllers.directory | ROOT . '/jaxon/Controller' | The directory of the Jaxon classes |
 | controllers.namespace | \Jaxon\App  | The namespace of the Jaxon classes |
 | controllers.separator | .           | The separator in Jaxon class names |
