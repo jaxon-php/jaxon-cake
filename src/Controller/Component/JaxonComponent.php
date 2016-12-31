@@ -27,6 +27,14 @@ class JaxonComponent extends Component
 
         // Read and set the config options from the config file
         $this->appConfig = Config::read($appPath . '/config/jaxon.php', 'lib', 'app');
+        // The request URI can be set with a named route
+        $jaxon = jaxon();
+        if(!$jaxon->hasOption('core.request.uri') &&
+            ($route = $this->appConfig->getOption('request.route', null)) &&
+            ($url = Router::url(['_name' => $route])))
+        {
+            $jaxon->setOption('core.request.uri', $url);
+        }
 
         // Jaxon library default settings
         $this->setLibraryOptions(!$isDebug, !$isDebug, $baseUrl . '/jaxon/js', $baseDir . '/jaxon/js');

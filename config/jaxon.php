@@ -2,6 +2,9 @@
 
 return array(
     'app' => array(
+        'request' => array(
+            // 'route' => 'jaxon',
+        ),
         'controllers' => array(
             // 'directory' => '',
             // 'namespace' => '',
