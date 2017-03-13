@@ -2,40 +2,29 @@
 
 namespace Jaxon\Cake;
 
-class View
+use Jaxon\Module\View\Store;
+use Jaxon\Module\View\Facade;
+
+class View extends Facade
 {
-    protected $data;
     protected $view; // CakePHP View object
 
     public function __construct($view)
     {
-        $this->data = array();
+        parent::__construct();
         $this->view = $view;
     }
 
     /**
-     * Make a piece of data available for all views
-     *
-     * @param string        $name            The data name
-     * @param string        $value           The data value
+     * Render a view
      * 
-     * @return void
-     */
-    public function share($name, $value)
-    {
-        $this->data[$name] = $value;
-    }
-
-    /**
-     * Render a template, without a layout
-     *
-     * @param string        $template        The template path
-     * @param string        $data            The template data
+     * @param Store         $store        A store populated with the view data
      * 
-     * @return mixed        The rendered template
+     * @return string        The string representation of the view
      */
-    public function render($template, array $data = array())
+    public function make(Store $store)
     {
-        return trim($this->view->element($template, array_merge($this->data, $data)), "\n");
+        // Render the template
+        return trim($this->view->element($store->getViewPath(), $store->getViewData()), " \t\n");
     }
 }
