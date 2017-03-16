@@ -48,6 +48,12 @@ class JaxonComponent extends Component
 
         // Jaxon controller class
         $this->setControllerClass('\\Jaxon\\Cake\\Controller');
+
+        // Set the view
+        $registry = $this->_registry;
+        $this->setJaxonView(function() use($registry) {
+            return new View($registry->getController()->createView());
+        });
     }
 
     /**
@@ -60,20 +66,6 @@ class JaxonComponent extends Component
     protected function jaxonCheck()
     {
         // Todo: check the mandatory options
-    }
-
-    /**
-     * Return the view renderer.
-     *
-     * @return void
-     */
-    protected function jaxonView()
-    {
-        if($this->jaxonViewRenderer == null)
-        {
-            $this->jaxonViewRenderer = new View($this->_registry->getController()->createView());
-        }
-        return $this->jaxonViewRenderer;
     }
 
     /**
