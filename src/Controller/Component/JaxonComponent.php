@@ -4,6 +4,7 @@ namespace Jaxon\Cake\Controller\Component;
 
 use Jaxon\Config\Php as Config;
 use Jaxon\Cake\View;
+use Jaxon\Cake\Session;
 
 use Cake\Controller\Component;
 use Cake\Routing\Router;
@@ -53,6 +54,12 @@ class JaxonComponent extends Component
         $registry = $this->_registry;
         $this->setJaxonView(function() use($registry) {
             return new View($registry->getController()->createView());
+        });
+
+        // Set the session
+        $session = $this->request->session();
+        $this->setJaxonSession(function() use($session) {
+            return new Session($session);
         });
     }
 
