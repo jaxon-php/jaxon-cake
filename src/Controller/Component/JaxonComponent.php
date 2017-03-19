@@ -47,9 +47,6 @@ class JaxonComponent extends Component
         // Jaxon application default settings
         $this->setApplicationOptions($appPath . '/jaxon/Controller', '\\Jaxon\\App');
 
-        // Jaxon controller class
-        $this->setControllerClass('\\Jaxon\\Cake\\Controller');
-
         // Set the view
         $registry = $this->_registry;
         $this->setJaxonView(function() use($registry) {
