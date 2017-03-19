@@ -2,6 +2,8 @@
 
 namespace Jaxon\Cake;
 
+use Cake\Utility\Hash;
+
 class Session
 {
     /**
@@ -14,6 +16,32 @@ class Session
     public function __construct($xSession)
     {
         $this->xSession = $xSession;
+    }
+
+    /**
+     * Get the current session id
+     * 
+     * @return string           The session id
+     */
+    public function getId()
+    {
+        return $this->xSession->id();
+    }
+
+    /**
+     * Generate a new session id
+     * 
+     * @param bool          $bDeleteData         Whether to delete data from the previous session
+     * 
+     * @return void
+     */
+    public function newId($bDeleteData = false)
+    {
+        if($bDeleteData)
+        {
+            $this->clear();
+        }
+        $this->xSession->renew();
     }
 
     /**
@@ -52,5 +80,41 @@ class Session
     public function get($sKey, $xDefault = null)
     {
         return $this->has($sKey) ? $this->xSession->read($sKey) : $xDefault;
+    }
+
+    /**
+     * Get all data in the session
+     * 
+     * @return array             An array of all data in the session
+     */
+    public function all()
+    {
+        return $this->xSession->read();
+    }
+
+    /**
+     * Delete a session key and its data
+     *
+     * @param string        $sKey                The session key
+     * 
+     * @return void
+     */
+    public function delete($sKey)
+    {
+        $this->xSession->delete($sKey);
+    }
+
+    /**
+     * Delete all data in the session
+     * 
+     * @return void
+     */
+    public function clear()
+    {
+        // $this->xSession->clear(); // This does not work
+        foreach($this->all() as $key => $value)
+        {
+            $this->delete($key);
+        }
     }
 }
