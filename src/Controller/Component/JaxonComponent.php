@@ -47,15 +47,19 @@ class JaxonComponent extends Component
         // Jaxon application default settings
         $this->setApplicationOptions($appPath . '/jaxon/Controller', '\\Jaxon\\App');
 
-        // Set the view
+        // Set the default view namespace
+        $this->addViewNamespace('default', '', '', 'cakephp');
+        $this->appConfig->setOption('options.views.default', 'default');
+
+        // Add the view renderer
         $registry = $this->_registry;
-        $this->setJaxonView(function() use($registry) {
+        $this->addViewRenderer('cakephp', function() use($registry) {
             return new View($registry->getController()->createView());
         });
 
-        // Set the session
+        // Set the session manager
         $session = $this->request->session();
-        $this->setJaxonSession(function() use($session) {
+        $this->setSessionManager(function() use($session) {
             return new Session($session);
         });
     }
