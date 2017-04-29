@@ -6,10 +6,12 @@ return array(
             // 'route' => 'jaxon',
         ),
         'controllers' => array(
-            // 'directory' => '',
-            // 'namespace' => '',
-            // 'separator' => '', // '.' or '_'
-            // 'protected' => array(),
+            array(
+                'directory' => rtrim(ROOT, '/') . '/jaxon/Controller',
+                'namespace' => '\\Jaxon\\App',
+                // 'separator' => '', // '.' or '_'
+                // 'protected' => array(),
+            ),
         ),
     ),
     'lib' => array(
