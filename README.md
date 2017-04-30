@@ -51,13 +51,21 @@ The options in the `lib` section are those of the Jaxon core library, while the 
 
 The following options can be defined in the `app` section of the config file.
 
+| Name | Description |
+|------|---------------|
+| classes | An array of directory containing Jaxon application classes |
+| views   | An array of directory containing Jaxon application views |
+| | | |
+
+By default, the `views` array is empty. Views are rendered from the framework default location.
+There's a single entry in the `classes` array with the following values.
+
 | Name | Default value | Description |
 |------|---------------|-------------|
-| request.route | jaxon | The named route to the Jaxon request processor |
-| controllers.directory | ROOT . '/jaxon/Controller' | The directory of the Jaxon classes |
-| controllers.namespace | \Jaxon\App  | The namespace of the Jaxon classes |
-| controllers.separator | .           | The separator in Jaxon class names |
-| controllers.protected | empty array | Prevent Jaxon from exporting some methods |
+| directory | ROOT . '/jaxon/Controller' | The directory of the Jaxon classes |
+| namespace | \Jaxon\App  | The namespace of the Jaxon classes |
+| separator | .           | The separator in Jaxon class names |
+| protected | empty array | Prevent Jaxon from exporting some methods |
 | | | |
 
 Usage
@@ -94,19 +102,15 @@ Then it calls the `$this->Jaxon->css()`, `$this->Jaxon->js()` and `$this->Jaxon-
 
 ### The Jaxon classes
 
-The Jaxon classes must inherit from `\Jaxon\Module\Controller`.
+The Jaxon classes must inherit from `\Jaxon\Sentry\Classes\Base`.
+By default, they are located in the `ROOT/jaxon/Classes` dir of the CakePHP application, and the associated namespace is `\Jaxon\App`.
 
-The Jaxon classes of the application must all be located in the directory indicated by the `app.controllers.directory` option in the `config/jaxon.php` config file.
-If there is a namespace associated, the `app.controllers.namespace` option should be set accordingly.
-
-By default, the Jaxon classes are located in the `ROOT/jaxon/Controller` dir of the CakePHP application, and the associated namespace is `\Jaxon\App`.
-
-This is an example of a Jaxon class, defined in the `ROOT/jaxon/Controller/HelloWorld.php` file.
+This is an example of a Jaxon class, defined in the `ROOT/jaxon/Classes/HelloWorld.php` file.
 
 ```php
 namespace Jaxon\App;
 
-class HelloWorld extends \Jaxon\Module\Controller
+class HelloWorld extends \Jaxon\Sentry\Classes\Base
 {
     public function sayHello()
     {

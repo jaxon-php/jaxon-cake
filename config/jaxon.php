@@ -5,9 +5,9 @@ return array(
         'request' => array(
             // 'route' => 'jaxon',
         ),
-        'controllers' => array(
+        'classes' => array(
             array(
-                'directory' => rtrim(ROOT, '/') . '/jaxon/Controller',
+                'directory' => rtrim(ROOT, '/') . '/jaxon/Classes',
                 'namespace' => '\\Jaxon\\App',
                 // 'separator' => '', // '.' or '_'
                 // 'protected' => array(),
@@ -41,7 +41,6 @@ return array(
                 // 'dir' => '',
                 // 'extern' => true,
                 // 'minify' => true,
-                'options' => '',
             ),
         ),
     ),

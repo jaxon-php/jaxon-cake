@@ -12,7 +12,7 @@ use Cake\Core\Configure;
 
 class JaxonComponent extends Component
 {
-    use \Jaxon\Module\Traits\Module;
+    use \Jaxon\Sentry\Traits\Armada;
 
     /**
      * Set the module specific options for the Jaxon library.
@@ -25,6 +25,8 @@ class JaxonComponent extends Component
         $appPath = rtrim(ROOT, '/');
         $baseUrl = rtrim(Router::fullBaseUrl(), '/');
         $baseDir = rtrim(WWW_ROOT, '/');
+
+        $sentry = jaxon()->sentry();
 
         // Read and set the config options from the config file
         $this->appConfig = Config::read($appPath . '/config/jaxon.php', 'lib', 'app');
@@ -42,21 +44,21 @@ class JaxonComponent extends Component
         }
 
         // Jaxon library default settings
-        $this->setLibraryOptions(!$isDebug, !$isDebug, $baseUrl . '/jaxon/js', $baseDir . '/jaxon/js');
+        $sentry->setLibraryOptions(!$isDebug, !$isDebug, $baseUrl . '/jaxon/js', $baseDir . '/jaxon/js');
 
         // Set the default view namespace
-        $this->addViewNamespace('default', '', '', 'cakephp');
+        $sentry->addViewNamespace('default', '', '', 'cakephp');
         $this->appConfig->setOption('options.views.default', 'default');
 
         // Add the view renderer
         $registry = $this->_registry;
-        $this->addViewRenderer('cakephp', function() use($registry) {
+        $sentry->addViewRenderer('cakephp', function() use($registry) {
             return new View($registry->getController()->createView());
         });
 
         // Set the session manager
         $session = $this->request->session();
-        $this->setSessionManager(function() use($session) {
+        $sentry->setSessionManager(function() use($session) {
             return new Session($session);
         });
     }
