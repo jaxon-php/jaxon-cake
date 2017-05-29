@@ -2,7 +2,6 @@
 
 namespace Jaxon\Cake\Controller\Component;
 
-use Jaxon\Config\Php as Config;
 use Jaxon\Cake\View;
 use Jaxon\Cake\Session;
 
@@ -26,12 +25,12 @@ class JaxonComponent extends Component
         $baseUrl = rtrim(Router::fullBaseUrl(), '/');
         $baseDir = rtrim(WWW_ROOT, '/');
 
-        $sentry = jaxon()->sentry();
+        $jaxon = jaxon();
+        $sentry = $jaxon->sentry();
 
         // Read and set the config options from the config file
-        $this->appConfig = Config::read($appPath . '/config/jaxon.php', 'lib', 'app');
+        $this->appConfig = $jaxon->readConfigFile($appPath . '/config/jaxon.php', 'lib', 'app');
         // The request URI can be set with a named route
-        $jaxon = jaxon();
         if(!$jaxon->hasOption('core.request.uri') && ($route = $this->appConfig->getOption('request.route', null)))
         {
             try
