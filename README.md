@@ -102,7 +102,7 @@ Then it calls the `$this->Jaxon->css()`, `$this->Jaxon->js()` and `$this->Jaxon-
 
 ### The Jaxon classes
 
-The Jaxon classes must inherit from `\Jaxon\Sentry\Classes\Base`.
+The Jaxon classes must inherit from `\Jaxon\Sentry\Classes\Armada`.
 By default, they are located in the `ROOT/jaxon/Classes` dir of the CakePHP application, and the associated namespace is `\Jaxon\App`.
 
 This is an example of a Jaxon class, defined in the `ROOT/jaxon/Classes/HelloWorld.php` file.
@@ -110,7 +110,7 @@ This is an example of a Jaxon class, defined in the `ROOT/jaxon/Classes/HelloWor
 ```php
 namespace Jaxon\App;
 
-class HelloWorld extends \Jaxon\Sentry\Classes\Base
+class HelloWorld extends \Jaxon\Sentry\Classes\Armada
 {
     public function sayHello()
     {
