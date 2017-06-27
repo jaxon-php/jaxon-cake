@@ -51,13 +51,13 @@ class JaxonComponent extends Component
 
         // Add the view renderer
         $registry = $this->_registry;
-        $sentry->addViewRenderer('cakephp', function() use($registry) {
+        $sentry->addViewRenderer('cakephp', function () use ($registry) {
             return new View($registry->getController()->createView());
         });
 
         // Set the session manager
         $session = $this->request->session();
-        $sentry->setSessionManager(function() use($session) {
+        $sentry->setSessionManager(function () use ($session) {
             return new Session($session);
         });
     }
