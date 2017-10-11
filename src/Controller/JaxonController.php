@@ -75,13 +75,13 @@ class JaxonController extends AppController
             $this->layout = 'ajax';
         }
 
-        $this->Jaxon->onInit(function($instance) {
+        $this->Jaxon->onInit(function ($instance) {
             $this->initInstance($instance);
         });
-        $this->Jaxon->onBefore(function($instance, $method, &$bEndRequest) {
+        $this->Jaxon->onBefore(function ($instance, $method, &$bEndRequest) {
             $this->beforeRequest($instance, $method, $bEndRequest);
         });
-        $this->Jaxon->onAfter(function($instance, $method) {
+        $this->Jaxon->onAfter(function ($instance, $method) {
             $this->afterRequest($instance, $method);
         });
 
