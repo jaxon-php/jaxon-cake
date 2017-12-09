@@ -14,6 +14,21 @@ class JaxonComponent extends Component
     use \Jaxon\Sentry\Traits\Armada;
 
     /**
+     * Constructor hook method.
+     *
+     * Implement this method to avoid having to overwrite the constructor and call parent.
+     *
+     * @param array $config The configuration settings provided to this component.
+     *
+     * @return void
+     */
+    public function initialize(array $config)
+    {
+        // Initialize the Jaxon plugin
+        $this->_jaxonSetup();
+    }
+
+    /**
      * Set the module specific options for the Jaxon library.
      *
      * @return void
