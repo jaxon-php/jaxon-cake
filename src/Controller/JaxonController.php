@@ -20,19 +20,6 @@ class JaxonController extends AppController
     }
 
     /**
-     * Callback for initializing a Jaxon class instance.
-     *
-     * This function is called anytime a Jaxon class is instanciated.
-     *
-     * @param object            $instance               The Jaxon class instance
-     *
-     * @return void
-     */
-    public function initInstance($instance)
-    {
-    }
-
-    /**
      * Callback before processing a Jaxon request.
      *
      * @param object            $instance               The Jaxon class instance to call
@@ -75,13 +62,10 @@ class JaxonController extends AppController
             $this->layout = 'ajax';
         }
 
-        $this->Jaxon->onInit(function ($instance) {
-            $this->initInstance($instance);
-        });
-        $this->Jaxon->onBefore(function ($instance, $method, &$bEndRequest) {
+        $this->Jaxon->callback()->before(function ($instance, $method, &$bEndRequest) {
             $this->beforeRequest($instance, $method, $bEndRequest);
         });
-        $this->Jaxon->onAfter(function ($instance, $method) {
+        $this->Jaxon->callback()->after(function ($instance, $method) {
             $this->afterRequest($instance, $method);
         });
 
@@ -89,6 +73,7 @@ class JaxonController extends AppController
         if($this->Jaxon->canProcessRequest())
         {
             $this->Jaxon->processRequest();
+            return $this->Jaxon->httpResponse();
         }
     }
 }
