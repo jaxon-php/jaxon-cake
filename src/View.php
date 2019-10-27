@@ -2,7 +2,7 @@
 
 namespace Jaxon\Cake;
 
-use Jaxon\Ui\View\Store;
+use Jaxon\Utils\View\Store;
 use Jaxon\Contracts\View as ViewContract;
 
 class View implements ViewContract
