@@ -72,12 +72,12 @@ class JaxonComponent extends Component
             return new Session($this->request->session());
         });
 
-        $this->jaxon()
+        $this->bootstrap()
             ->lib($aLibOptions)
             ->app($aAppOptions)
             // ->uri($sUri)
             ->js(!$bIsDebug, $sJsUrl, $sJsDir, !$bIsDebug)
-            ->bootstrap(false);
+            ->run(false);
     }
 
     /**
