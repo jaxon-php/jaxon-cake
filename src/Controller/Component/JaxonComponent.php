@@ -11,7 +11,7 @@ use Cake\Core\Configure;
 
 class JaxonComponent extends Component
 {
-    use \Jaxon\Sentry\Traits\Armada;
+    use \Jaxon\Features\App;
 
     /**
      * Constructor hook method.
@@ -25,7 +25,7 @@ class JaxonComponent extends Component
     public function initialize(array $config)
     {
         // Initialize the Jaxon plugin
-        $this->_jaxonSetup();
+        $this->setupJaxon();
     }
 
     /**
@@ -33,75 +33,75 @@ class JaxonComponent extends Component
      *
      * @return void
      */
-    protected function jaxonSetup()
+    protected function setupJaxon()
     {
-        $isDebug = (Configure::read('debug') > 0);
-        $appPath = rtrim(ROOT, '/');
-        $baseUrl = rtrim(Router::fullBaseUrl(), '/');
-        $baseDir = rtrim(WWW_ROOT, '/');
+        $bIsDebug = (Configure::read('debug') > 0);
+        $sAppPath = rtrim(ROOT, '/');
+        $sJsUrl = rtrim(Router::fullBaseUrl(), '/') . '/jaxon/js';
+        $sJsDir = rtrim(WWW_ROOT, '/') . '/jaxon/js';
 
         $jaxon = jaxon();
-        $sentry = $jaxon->sentry();
+        // Read the config options.
+        $aOptions = $jaxon->config()->read($sAppPath . '/config/jaxon.php');
+        $aLibOptions = key_exists('lib', $aOptions) ? $aOptions['lib'] : [];
+        $aAppOptions = key_exists('app', $aOptions) ? $aOptions['app'] : [];
 
-        // Read and set the config options from the config file
-        $this->appConfig = $jaxon->readConfigFile($appPath . '/config/jaxon.php', 'lib', 'app');
         // The request URI can be set with a named route
-        if(!$jaxon->hasOption('core.request.uri') && ($route = $this->appConfig->getOption('request.route', null)))
-        {
-            try
-            {
-                // This call throws an exception if the named route is not found.
-                $url = Router::url(['_name' => $route]);
-                $jaxon->setOption('core.request.uri', $url);
-            }
-            catch(\Exception $e){}
-        }
+        // if(!$jaxon->hasOption('core.request.uri') && ($route = $this->appConfig->getOption('request.route', null)))
+        // {
+        //     try
+        //     {
+        //         // This call throws an exception if the named route is not found.
+        //         $url = Router::url(['_name' => $route]);
+        //         $this->jaxon()->uri($url);
+        //     }
+        //     catch(\Exception $e){}
+        // }
 
-        // Jaxon library default settings
-        $sentry->setLibraryOptions(!$isDebug, !$isDebug, $baseUrl . '/jaxon/js', $baseDir . '/jaxon/js');
-
+        $di = $jaxon->di();
+        $viewManager = $di->getViewmanager();
         // Set the default view namespace
-        $sentry->addViewNamespace('default', '', '', 'cakephp');
-        $this->appConfig->setOption('options.views.default', 'default');
-
+        $viewManager->addNamespace('default', '', '', 'cakephp');
         // Add the view renderer
-        $registry = $this->_registry;
-        $sentry->addViewRenderer('cakephp', function () use ($registry) {
-            return new View($registry->getController()->createView());
+        $viewManager->addRenderer('cakephp', function () {
+            return new View($this->_registry->getController()->createView());
         });
 
         // Set the session manager
-        $session = $this->request->session();
-        $sentry->setSessionManager(function () use ($session) {
-            return new Session($session);
+        $di->setSessionManager(function () {
+            return new Session($this->request->session());
         });
+
+        $this->bootstrap()
+            ->lib($aLibOptions)
+            ->app($aAppOptions)
+            // ->uri($sUri)
+            ->js(!$bIsDebug, $sJsUrl, $sJsDir, !$bIsDebug)
+            ->run();
+
+        // Prevent the Jaxon library from sending the response or exiting
+        $jaxon->setOption('core.response.send', false);
+        $jaxon->setOption('core.process.exit', false);
     }
 
     /**
-     * Set the module specific options for the Jaxon library.
+     * Process an incoming Jaxon request, and return the response.
      *
-     * This method needs to set at least the Jaxon request URI.
-     *
-     * @return void
+     * @return mixed
      */
-    protected function jaxonCheck()
+    public function processRequest()
     {
-        // Todo: check the mandatory options
-    }
+        $jaxon = jaxon();
+        // Process the jaxon request
+        $jaxon->processRequest();
+        // Get the reponse to the request
+        $jaxonResponse = $jaxon->di()->getResponseManager()->getResponse();
 
-    /**
-     * Wrap the Jaxon response into an HTTP response.
-     *
-     * @param  $code        The HTTP Response code
-     *
-     * @return HTTP Response
-     */
-    public function httpResponse($code = '200')
-    {
         // Fill and return the CakePHP HTTP response
-        $this->response->type($this->ajaxResponse()->getContentType());
-        $this->response->charset($this->ajaxResponse()->getCharacterEncoding());
-        $this->response->body($this->ajaxResponse()->getOutput());
+        $code = '200';
+        $this->response->type($jaxonResponse->getContentType());
+        $this->response->charset($jaxonResponse->getCharacterEncoding());
+        $this->response->body($jaxonResponse->getOutput());
         $this->response->statusCode($code);
         return $this->response;
     }

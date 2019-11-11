@@ -3,8 +3,9 @@
 namespace Jaxon\Cake;
 
 use Cake\Utility\Hash;
+use Jaxon\Contracts\Session as SessionContract;
 
-class Session
+class Session implements SessionContract
 {
     /**
      * The CakePHP session
