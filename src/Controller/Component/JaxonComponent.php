@@ -78,21 +78,30 @@ class JaxonComponent extends Component
             // ->uri($sUri)
             ->js(!$bIsDebug, $sJsUrl, $sJsDir, !$bIsDebug)
             ->run(false);
+
+        // Prevent the Jaxon library from sending the response or exiting
+        $jaxon->setOption('core.response.send', false);
+        $jaxon->setOption('core.process.exit', false);
     }
 
     /**
-     * Wrap the Jaxon response into an HTTP response.
+     * Process an incoming Jaxon request, and return the response.
      *
-     * @param  $code        The HTTP Response code
-     *
-     * @return HTTP Response
+     * @return mixed
      */
-    public function httpResponse($code = '200')
+    public function processRequest()
     {
+        $jaxon = jaxon();
+        // Process the jaxon request
+        $jaxon->processRequest();
+        // Get the reponse to the request
+        $jaxonResponse = $jaxon->di()->getResponseManager()->getResponse();
+
         // Fill and return the CakePHP HTTP response
-        $this->response->type($this->ajaxResponse()->getContentType());
-        $this->response->charset($this->ajaxResponse()->getCharacterEncoding());
-        $this->response->body($this->ajaxResponse()->getOutput());
+        $code = '200';
+        $this->response->type($jaxonResponse->getContentType());
+        $this->response->charset($jaxonResponse->getCharacterEncoding());
+        $this->response->body($jaxonResponse->getOutput());
         $this->response->statusCode($code);
         return $this->response;
     }

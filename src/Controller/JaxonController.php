@@ -68,8 +68,7 @@ class JaxonController extends AppController
         // Process Jaxon request
         if($this->Jaxon->canProcessRequest())
         {
-            $this->Jaxon->processRequest();
-            return $this->Jaxon->httpResponse();
+            return $this->Jaxon->processRequest();
         }
     }
 }
