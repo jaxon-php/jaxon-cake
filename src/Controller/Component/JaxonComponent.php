@@ -93,11 +93,12 @@ class JaxonComponent extends Component
      */
     public function httpResponse($code = '200')
     {
+        $jaxon = jaxon();
         // Get the reponse to the request
         $jaxonResponse = $jaxon->di()->getResponseManager()->getResponse();
         if(!$jaxonResponse)
         {
-            $jaxonResponse = jaxon()->getResponse();
+            $jaxonResponse = $jaxon->getResponse();
         }
 
         // Fill and return the CakePHP HTTP response
@@ -115,9 +116,8 @@ class JaxonComponent extends Component
      */
     public function processRequest()
     {
-        $jaxon = jaxon();
         // Process the jaxon request
-        $jaxon->processRequest();
+        jaxon()->processRequest();
 
         // Return the reponse to the request
         return $this->httpResponse();
