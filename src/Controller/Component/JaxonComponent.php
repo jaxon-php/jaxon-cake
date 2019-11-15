@@ -59,7 +59,7 @@ class JaxonComponent extends Component
         // }
 
         $di = $jaxon->di();
-        $viewManager = $di->getViewmanager();
+        $viewManager = $di->getViewManager();
         // Set the default view namespace
         $viewManager->addNamespace('default', '', '', 'cakephp');
         // Add the view renderer
@@ -85,6 +85,30 @@ class JaxonComponent extends Component
     }
 
     /**
+     * Get the HTTP response
+     *
+     * @param string    $code       The HTTP response code
+     *
+     * @return mixed
+     */
+    public function httpResponse($code = '200')
+    {
+        // Get the reponse to the request
+        $jaxonResponse = $jaxon->di()->getResponseManager()->getResponse();
+        if(!$jaxonResponse)
+        {
+            $jaxonResponse = jaxon()->getResponse();
+        }
+
+        // Fill and return the CakePHP HTTP response
+        $this->response->type($jaxonResponse->getContentType());
+        $this->response->charset($jaxonResponse->getCharacterEncoding());
+        $this->response->body($jaxonResponse->getOutput());
+        $this->response->statusCode($code);
+        return $this->response;
+    }
+
+    /**
      * Process an incoming Jaxon request, and return the response.
      *
      * @return mixed
@@ -94,15 +118,8 @@ class JaxonComponent extends Component
         $jaxon = jaxon();
         // Process the jaxon request
         $jaxon->processRequest();
-        // Get the reponse to the request
-        $jaxonResponse = $jaxon->di()->getResponseManager()->getResponse();
 
-        // Fill and return the CakePHP HTTP response
-        $code = '200';
-        $this->response->type($jaxonResponse->getContentType());
-        $this->response->charset($jaxonResponse->getCharacterEncoding());
-        $this->response->body($jaxonResponse->getOutput());
-        $this->response->statusCode($code);
-        return $this->response;
+        // Return the reponse to the request
+        return $this->httpResponse();
     }
 }
