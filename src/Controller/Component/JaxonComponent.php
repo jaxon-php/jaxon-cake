@@ -8,10 +8,20 @@ use Jaxon\Cake\Session;
 use Cake\Controller\Component;
 use Cake\Routing\Router;
 use Cake\Core\Configure;
+use Cake\Log\Log;
 
 class JaxonComponent extends Component
 {
     use \Jaxon\Features\App;
+
+    /**
+     * The logger engine
+     *
+     * By default, Jaxon will use the CakePHP "error" logger.
+     *
+     * @var string
+     */
+    protected $loggerEngine = 'error';
 
     /**
      * Constructor hook method.
@@ -26,6 +36,10 @@ class JaxonComponent extends Component
     {
         // Initialize the Jaxon plugin
         $this->setupJaxon();
+        if(\array_key_exists('logger', $config))
+        {
+            $this->loggerEngine = $config['logger'];
+        }
     }
 
     /**
@@ -71,6 +85,12 @@ class JaxonComponent extends Component
         $di->setSessionManager(function () {
             return new Session($this->request->session());
         });
+
+        // Set the logger
+        if(($logger = Log::engine($this->loggerEngine)))
+        {
+            $this->setLogger($logger);
+        }
 
         $this->bootstrap()
             ->lib($aLibOptions)
