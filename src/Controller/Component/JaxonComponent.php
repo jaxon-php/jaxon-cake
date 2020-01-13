@@ -4,11 +4,11 @@ namespace Jaxon\Cake\Controller\Component;
 
 use Jaxon\Cake\View;
 use Jaxon\Cake\Session;
+use Jaxon\Cake\Logger;
 
 use Cake\Controller\Component;
 use Cake\Routing\Router;
 use Cake\Core\Configure;
-use Cake\Log\Log;
 
 class JaxonComponent extends Component
 {
@@ -34,12 +34,12 @@ class JaxonComponent extends Component
      */
     public function initialize(array $config)
     {
-        // Initialize the Jaxon plugin
-        $this->setupJaxon();
         if(\array_key_exists('logger', $config))
         {
             $this->loggerEngine = $config['logger'];
         }
+        // Initialize the Jaxon plugin
+        $this->setupJaxon();
     }
 
     /**
@@ -87,10 +87,11 @@ class JaxonComponent extends Component
         });
 
         // Set the logger
-        if(($logger = Log::engine($this->loggerEngine)))
+        /*if(($logger = Log::engine($this->loggerEngine)))
         {
             $this->setLogger($logger);
-        }
+        }*/
+        $this->setLogger(new Logger());
 
         $this->bootstrap()
             ->lib($aLibOptions)

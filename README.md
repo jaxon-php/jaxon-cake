@@ -87,9 +87,6 @@ class DemoController extends AppController
 
     public function index()
     {
-        // Call the Jaxon module
-        $this->Jaxon->register();
-
         $this->set('jaxonCss', $this->Jaxon->css());
         $this->set('jaxonJs', $this->Jaxon->js());
         $this->set('jaxonScript', $this->Jaxon->script());
