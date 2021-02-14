@@ -30,7 +30,7 @@ class JaxonController extends AppController
     {
         if(substr(Configure::version(), 0, 3) != '3.0')
         {
-            $this->viewBuilder()->layout('ajax');
+            $this->viewBuilder()->setLayout('ajax');
         }
         else
         {

@@ -6,7 +6,7 @@ return [
             // 'route' => 'jaxon',
         ],
         'directories' => [
-            rtrim(ROOT, '/') . '/jaxon/Classes' => [
+            rtrim(ROOT, '/') . '/jaxon/App' => [
                 'namespace' => '\\Jaxon\\App',
                 // 'separator' => '', // '.' or '_'
                 // 'protected' => [],

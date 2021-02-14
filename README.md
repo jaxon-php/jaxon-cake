@@ -14,16 +14,16 @@ Installation
 
 First install CakePHP version 3.
 
-Create the `composer.json` file into the installation dir with the following content.
+Add the the following content in the `composer.json` file and run `composer install`.
 ```json
 {
     "require": {
-        "jaxon-php/jaxon-cake": "~3.0",
+        "jaxon-php/jaxon-cake": "~3.1",
     }
 }
 ```
 
-Add the Jaxon plugin in the `vendor/cakephp-plugins.php` file.
+Register the Jaxon plugin in the `vendor/cakephp-plugins.php` file.
 ```php
 return [
     'plugins' => [
@@ -33,12 +33,12 @@ return [
 ];
 ```
 
-Load the Jaxon plugin in the controller or in the bootstrap file.
-```php
-Plugin::load('Jaxon/Cake', array('autoload' => true, 'routes' => true));
+Load the Jaxon plugin.
+```bash
+./bin/cake plugin load "Jaxon/Cake"
 ```
 
-Load the Jaxon component in the controller.
+If you need to call Jaxon in your controller, you must also load the Jaxon component.
 ```php
 $this->loadComponent('Jaxon/Cake.Jaxon');
 ```
@@ -62,7 +62,7 @@ There's a single entry in the `directories` array with the following values.
 
 | Name | Default value | Description |
 |------|---------------|-------------|
-| directory | ROOT . '/jaxon/Controller' | The directory of the Jaxon classes |
+| directory | ROOT . '/jaxon/App' | The directory of the Jaxon classes |
 | namespace | \Jaxon\App  | The namespace of the Jaxon classes |
 | separator | .           | The separator in Jaxon class names |
 | protected | empty array | Prevent Jaxon from exporting some methods |
@@ -100,9 +100,9 @@ Before it prints the page, the controller calls the `$this->Jaxon->css()`, `$thi
 ### The Jaxon classes
 
 The Jaxon classes can inherit from `\Jaxon\CallableClass`.
-By default, they are located in the `ROOT/jaxon/Classes` dir of the CakePHP application, and the associated namespace is `\Jaxon\App`.
+By default, they are located in the `ROOT/jaxon/App` dir of the CakePHP application, and the associated namespace is `\Jaxon\App`.
 
-This is an example of a Jaxon class, defined in the `ROOT/jaxon/Classes/HelloWorld.php` file.
+This is an example of a Jaxon class, defined in the `ROOT/jaxon/App/HelloWorld.php` file.
 
 ```php
 namespace Jaxon\App;
