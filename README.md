@@ -1,7 +1,7 @@
 Jaxon Library for CakePHP
 =========================
 
-This package integrates the [Jaxon library](https://github.com/jaxon-php/jaxon-core) into the CakePHP 3 framework.
+This package integrates the [Jaxon library](https://github.com/jaxon-php/jaxon-core) into the CakePHP framework, versions 3 and 4.
 
 Features
 --------
@@ -12,13 +12,14 @@ Features
 Installation
 ------------
 
-First install CakePHP version 3.
+First install CakePHP version 3 or 4.
 
+For CakePHP 4, install the version `3.2.*` of the Jaxon plugin, and for CakePHP 3, installe the version `3.1.*`.
 Add the the following content in the `composer.json` file and run `composer install`.
 ```json
 {
     "require": {
-        "jaxon-php/jaxon-cake": "~3.1",
+        "jaxon-php/jaxon-cake": "3.2.*",
     }
 }
 ```
@@ -78,7 +79,8 @@ namespace App\Controller;
 
 class DemoController extends AppController
 {
-    public function initialize()
+    // Remove the return type (void) if you are using CakePHP 3.
+    public function initialize(): void
     {
         parent::initialize();
         // Load the Jaxon component

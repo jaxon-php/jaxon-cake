@@ -32,7 +32,7 @@ class JaxonComponent extends Component
      *
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         if(\array_key_exists('logger', $config))
         {
@@ -78,12 +78,12 @@ class JaxonComponent extends Component
         $viewManager->addNamespace('default', '', '', 'cakephp');
         // Add the view renderer
         $viewManager->addRenderer('cakephp', function () {
-            return new View($this->_registry->getController()->createView());
+            return new View($this->getController()->createView());
         });
 
         // Set the session manager
         $di->setSessionManager(function () {
-            return new Session($this->request->session());
+            return new Session($this->getController()->getRequest()->getSession());
         });
 
         // Set the logger
@@ -123,11 +123,11 @@ class JaxonComponent extends Component
         }
 
         // Fill and return the CakePHP HTTP response
-        return $this->response
+        return $this->getController()->getResponse()
             ->withType($jaxonResponse->getContentType())
             ->withCharset($jaxonResponse->getCharacterEncoding())
             ->withStringBody($jaxonResponse->getOutput())
-            ->withStatus($code);
+            ->withStatus(intval($code));
     }
 
     /**
