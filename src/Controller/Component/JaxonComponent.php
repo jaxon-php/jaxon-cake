@@ -100,7 +100,7 @@ class JaxonComponent extends Component
         // Fill and return the CakePHP HTTP response
         return $this->getController()->getResponse()
             ->withType($jaxonResponse->getContentType())
-            ->withCharset($this->jaxon->getCharacterEncoding())
+            ->withCharset($this->getCharacterEncoding())
             ->withStringBody($jaxonResponse->getOutput())
             ->withStatus(intval($sCode));
     }
