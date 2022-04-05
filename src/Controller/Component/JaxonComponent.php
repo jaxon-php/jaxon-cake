@@ -84,8 +84,7 @@ class JaxonComponent extends Component
         $this->bootstrap()
             ->lib($aLibOptions)
             ->app($aAppOptions)
-            // ->uri($sUri)
-            ->js(!$bIsDebug, $sJsUrl, $sJsDir, !$bIsDebug)
+            ->asset(!$bIsDebug, !$bIsDebug, $sJsUrl, $sJsDir)
             ->setup();
     }
 
