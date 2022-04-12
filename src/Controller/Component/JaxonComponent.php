@@ -38,7 +38,6 @@ class JaxonComponent extends Component
      */
     public function initialize(array $config): void
     {
-        $this->jaxon = jaxon();
         if(isset($config['logger']))
         {
             $this->loggerEngine = $config['logger'];
@@ -94,13 +93,13 @@ class JaxonComponent extends Component
     public function httpResponse(string $sCode = '200')
     {
         // Get the reponse to the request
-        $jaxonResponse = $this->jaxon->getResponse();
+        $ajaxResponse = $this->ajaxResponse();
 
         // Fill and return the CakePHP HTTP response
         return $this->getController()->getResponse()
-            ->withType($jaxonResponse->getContentType())
+            ->withType($ajaxResponse->getContentType())
             ->withCharset($this->getCharacterEncoding())
-            ->withStringBody($jaxonResponse->getOutput())
+            ->withStringBody($ajaxResponse->getOutput())
             ->withStatus(intval($sCode));
     }
 }

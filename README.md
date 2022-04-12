@@ -101,7 +101,7 @@ Before it prints the page, the controller calls the `$this->Jaxon->css()`, `$thi
 
 ### The Jaxon classes
 
-The Jaxon classes can inherit from `\Jaxon\CallableClass`.
+The Jaxon classes can inherit from `\Jaxon\App\CallableClass`.
 By default, they are located in the `ROOT/jaxon/App` dir of the CakePHP application, and the associated namespace is `\Jaxon\App`.
 
 This is an example of a Jaxon class, defined in the `ROOT/jaxon/App/HelloWorld.php` file.
@@ -109,7 +109,7 @@ This is an example of a Jaxon class, defined in the `ROOT/jaxon/App/HelloWorld.p
 ```php
 namespace Jaxon\App;
 
-class HelloWorld extends \Jaxon\CallableClass
+class HelloWorld extends \Jaxon\App\CallableClass
 {
     public function sayHello()
     {
