@@ -2,18 +2,28 @@
 
 namespace Jaxon\Cake;
 
+use Cake\Http\Session;
+use Cake\View\View as CakeView;
+use Jaxon\App\View\ViewInterface;
 use Jaxon\Utils\View\Store;
-use Jaxon\Contracts\View as ViewContract;
 
 use function trim;
 
-class View implements ViewContract
+class View implements ViewInterface
 {
-    protected $view; // CakePHP View object
+    /**
+     * @var CakeView
+     */
+    protected $xView;
 
-    public function __construct($view)
+    /**
+     * The constructor
+     *
+     * @param CakeView $xView
+     */
+    public function __construct(CakeView $xView)
     {
-        $this->view = $view;
+        $this->xView = $xView;
     }
 
     /**
@@ -25,7 +35,7 @@ class View implements ViewContract
      *
      * @return void
      */
-    public function addNamespace($sNamespace, $sDirectory, $sExtension = '')
+    public function addNamespace(string $sNamespace, string $sDirectory, string $sExtension = '')
     {}
 
     /**
@@ -33,11 +43,11 @@ class View implements ViewContract
      *
      * @param Store         $store        A store populated with the view data
      *
-     * @return string        The string representation of the view
+     * @return string
      */
     public function render(Store $store)
     {
         // Render the template
-        return trim($this->view->element($store->getViewName(), $store->getViewData()), " \t\n");
+        return trim($this->xView->element($store->getViewName(), $store->getViewData()), " \t\n");
     }
 }

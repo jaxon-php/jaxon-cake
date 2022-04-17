@@ -12,40 +12,52 @@ Features
 Installation
 ------------
 
-First install CakePHP version 3 or 4.
+The version 4 of the package requires CakePHP version 4.
 
-For CakePHP 4, install the version `3.2.*` of the Jaxon plugin, and for CakePHP 3, installe the version `3.1.*`.
-Add the the following content in the `composer.json` file and run `composer install`.
+Install the package with `Composer`.
+
+```bash
+composer require jaxon-php/jaxon-cake ^4.0
+```
+Or
 ```json
 {
     "require": {
-        "jaxon-php/jaxon-cake": "3.2.*",
+        "jaxon-php/jaxon-cake": "^4.0",
     }
 }
 ```
+And run `composer install`.
 
-Register the Jaxon plugin in the `vendor/cakephp-plugins.php` file.
+Routing and middlewares
+-----------------------
+
 ```php
-return [
-    'plugins' => [
-        ...
-        'Jaxon/Cake' => $baseDir . '/vendor/jaxon-php/jaxon-cake/',
-    ]
-];
+use Jaxon\Cake\Middleware\AjaxMiddleware as JaxonAjaxMiddleware;
+use Jaxon\Cake\Middleware\ConfigMiddleware as JaxonConfigMiddleware;
+
+$routes->scope('/', function (RouteBuilder $builder) {
+    // Register Jaxon middlewares
+    $builder->registerMiddleware('jaxon.ajax', new JaxonAjaxMiddleware());
+    $builder->registerMiddleware('jaxon.config', new JaxonConfigMiddleware());
+
+    // Apply the "jaxon.config" middleware to routes to pages that require Jaxon.
+    $builder->applyMiddleware('jaxon.config');
+
+    // Define the route that processes Jaxon requests, and apply the "jaxon.ajax" middleware.
+    $builder->scope('/ajax', function (RouteBuilder $builder) {
+        // Jaxon ajax middleware.
+        $builder->applyMiddleware('jaxon.ajax');
+
+        // Jaxon ajax route. Provide an empty controller method.
+        $builder->post('/', ['controller' => 'Jaxon', 'action' => 'ajax', '_name' => 'jaxon']);
+    });
+
+    ...
 ```
 
-Load the Jaxon plugin.
-```bash
-./bin/cake plugin load "Jaxon/Cake"
-```
-
-If you need to call Jaxon in your controller, you must also load the Jaxon component.
-```php
-$this->loadComponent('Jaxon/Cake.Jaxon');
-```
-
-Configuration
-------------
+Usage
+-----
 
 The settings in the `config/jaxon.php` config file are separated into two sections.
 The options in the `lib` section are those of the Jaxon core library, while the options in the `app` sections are those of the CakePHP application.

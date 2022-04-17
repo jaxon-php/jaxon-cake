@@ -20,5 +20,7 @@
         "psr-4": {
             "Jaxon\\Cake\\": "src/"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
