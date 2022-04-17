@@ -1,7 +1,7 @@
 Jaxon Library for CakePHP
 =========================
 
-This package integrates the [Jaxon library](https://github.com/jaxon-php/jaxon-core) into the CakePHP framework, versions 3 and 4.
+This package integrates the [Jaxon library](https://github.com/jaxon-php/jaxon-core) into the CakePHP framework.
 
 Features
 --------
