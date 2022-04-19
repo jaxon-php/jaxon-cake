@@ -26,6 +26,10 @@ And run `composer install`.
 Routing and middlewares
 -----------------------
 
+This package provides two middlewares, one to load the Jaxon config, and the other to process Jaxon requests.
+The Jaxon config middleware must be attached to the routes to all the pages where the Jaxon features are enabled,
+while the later must be attached to the controller action that processes Jaxon requests.
+
 ```php
 use Jaxon\Cake\Middleware\AjaxMiddleware as JaxonAjaxMiddleware;
 use Jaxon\Cake\Middleware\ConfigMiddleware as JaxonConfigMiddleware;
@@ -43,7 +47,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
         // Jaxon ajax middleware.
         $builder->applyMiddleware('jaxon.ajax');
 
-        // Jaxon ajax route. Provide an empty controller method.
+        // Jaxon ajax route. Provide an empty controller action.
         $builder->post('/', ['controller' => 'Jaxon', 'action' => 'ajax', '_name' => 'jaxon']);
     });
 
