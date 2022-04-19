@@ -72,11 +72,11 @@ class ConfigMiddleware extends PsrConfigMiddleware
         // Set the logger
         $xApp->setLogger(new Logger());
 
-        $bIsDebug = (Configure::read('debug') > 0);
+        $bExport = $bMinify = (Configure::read('debug') === 0);
         $sJsUrl = rtrim(Router::fullBaseUrl(), '/') . '/jaxon/js';
         $sJsDir = rtrim(WWW_ROOT, '/') . '/jaxon/js';
 
-        $xApp->asset(!$bIsDebug, !$bIsDebug, $sJsUrl, $sJsDir);
+        $xApp->asset($bExport, $bMinify, $sJsUrl, $sJsDir);
 
         return parent::process($request, $handler);
     }
