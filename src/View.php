@@ -5,7 +5,7 @@ namespace Jaxon\Cake;
 use Cake\Http\Session;
 use Cake\View\View as CakeView;
 use Jaxon\App\View\ViewInterface;
-use Jaxon\Utils\View\Store;
+use Jaxon\App\View\Store;
 
 use function trim;
 
@@ -45,7 +45,7 @@ class View implements ViewInterface
      *
      * @return string
      */
-    public function render(Store $store)
+    public function render(Store $store): string
     {
         // Render the template
         return trim($this->xView->element($store->getViewName(), $store->getViewData()), " \t\n");

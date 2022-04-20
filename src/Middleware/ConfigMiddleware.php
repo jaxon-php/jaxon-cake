@@ -59,10 +59,8 @@ class ConfigMiddleware extends PsrConfigMiddleware
     {
         $xApp = $this->di->getApp();
 
-        // Set the default view namespace
-        $xApp->addViewNamespace('default', '', '', 'cakephp');
         // Add the view renderer
-        $xApp->addViewRenderer('cakephp', function () {
+        $xApp->addViewRenderer('cakephp', '', function () {
             return new View($this->view());
         });
         // Set the session manager
