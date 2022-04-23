@@ -60,11 +60,11 @@ class ConfigMiddleware extends PsrConfigMiddleware
         $xApp = $this->di->getApp();
 
         // Add the view renderer
-        $xApp->addViewRenderer('cakephp', '', function () {
+        $xApp->addViewRenderer('cakephp', '', function() {
             return new View($this->view());
         });
         // Set the session manager
-        $xApp->setSessionManager(function () {
+        $xApp->setSessionManager(function() {
             return new Session($this->view()->getSession());
         });
         // Set the logger
