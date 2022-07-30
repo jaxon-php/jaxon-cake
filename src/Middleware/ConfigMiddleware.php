@@ -25,7 +25,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-use function jaxon;
+use function Jaxon\jaxon;
 use function rtrim;
 
 class ConfigMiddleware extends PsrConfigMiddleware
