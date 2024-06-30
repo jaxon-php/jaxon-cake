@@ -2,10 +2,9 @@
 
 namespace Jaxon\Cake;
 
-use Cake\Http\Session;
 use Cake\View\View as CakeView;
-use Jaxon\App\View\ViewInterface;
 use Jaxon\App\View\Store;
+use Jaxon\App\View\ViewInterface;
 
 use function trim;
 
