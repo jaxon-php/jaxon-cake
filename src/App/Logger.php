@@ -1,6 +1,6 @@
 <?php
 
-namespace Jaxon\Cake;
+namespace Jaxon\Cake\App;
 
 use Cake\Log\Log as CakeLogger;
 use Psr\Log\LoggerInterface;

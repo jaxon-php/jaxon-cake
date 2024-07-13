@@ -1,6 +1,6 @@
 <?php
 
-namespace Jaxon\Cake;
+namespace Jaxon\Cake\App;
 
 use Jaxon\App\Session\SessionInterface;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Jaxon\Cake;
+namespace Jaxon\Cake\App;
 
 use Cake\View\View as CakeView;
 use Jaxon\App\View\Store;

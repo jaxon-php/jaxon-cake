@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Helper;
+namespace Jaxon\Cake\View\Helper;
 
 use Cake\View\Helper;
 use Jaxon\Script\JsExpr;
