@@ -15,6 +15,8 @@
 namespace Jaxon\Cake\Middleware;
 
 use Jaxon\Request\Handler\Psr\PsrAjaxMiddleware;
+
+use function Jaxon\jaxon;
  
 class AjaxMiddleware extends PsrAjaxMiddleware
 {
@@ -23,7 +25,7 @@ class AjaxMiddleware extends PsrAjaxMiddleware
      */
     public function __construct()
     {
-        $di = \jaxon()->di();
+        $di = jaxon()->di();
         parent::__construct($di, $di->getRequestHandler(), $di->getResponseManager());
     }
 }

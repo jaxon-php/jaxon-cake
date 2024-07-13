@@ -52,6 +52,8 @@ $routes->scope('/', function (RouteBuilder $builder) {
     });
 
     ...
+});
+
 ```
 
 Usage
