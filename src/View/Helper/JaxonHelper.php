@@ -5,8 +5,10 @@ namespace Jaxon\Cake\View\Helper;
 use Cake\View\Helper;
 use Jaxon\Script\JsExpr;
 use Jaxon\Script\JxnCall;
+use Jaxon\Utils\Http\UriException;
 
 use function Jaxon\attr;
+use function Jaxon\jaxon;
 
 class JaxonHelper extends Helper
 {
@@ -59,5 +61,39 @@ class JaxonHelper extends Helper
     public function on(string|array $on, JsExpr $xJsExpr, array $options = []): string
     {
         return attr()->on($on, $xJsExpr, $options);
+    }
+
+    /**
+     * Get the HTML tags to include Jaxon javascript files into the page.
+     *
+     * @return string  the javascript code
+     */
+    public function js(): string
+    {
+        return jaxon()->getJs();
+    }
+
+    /**
+     * Get the HTML tags to include Jaxon CSS code and files into the page.
+     *
+     * @return string
+     */
+    public function css(): string
+    {
+        return jaxon()->getCss();
+    }
+
+    /**
+     * Returns the js header and wrapper code to be printed into the page
+     *
+     * @param bool $bIncludeJs    Also get the js code
+     * @param bool $bIncludeCss    Also get the css code
+     *
+     * @return string  the javascript code
+     * @throws UriException
+     */
+    public function script(bool $bIncludeJs = false, bool $bIncludeCss = false): string
+    {
+        return jaxon()->getScript($bIncludeJs, $bIncludeCss);
     }
 }
