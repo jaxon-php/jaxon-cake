@@ -38,18 +38,6 @@ class JaxonHelper extends Helper
     }
 
     /**
-     * Set a node as a target for event handler definitions
-     *
-     * @param string $name
-     *
-     * @return string
-     */
-    public function target(string $name = ''): string
-    {
-        return attr()->target($name);
-    }
-
-    /**
      * Set an event handler
      *
      * @param string|array $on
@@ -61,6 +49,31 @@ class JaxonHelper extends Helper
     public function on(string|array $on, JsExpr $xJsExpr, array $options = []): string
     {
         return attr()->on($on, $xJsExpr, $options);
+    }
+
+    /**
+     * Set an event handler
+     *
+     * @param JsExpr $xJsExpr
+     * @param array $options
+     *
+     * @return string
+     */
+    public function click(JsExpr $xJsExpr, array $options = []): string
+    {
+        return attr()->click($xJsExpr, $options);
+    }
+
+    /**
+     * Set a node as a target for event handler definitions
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    public function target(string $name = ''): string
+    {
+        return attr()->target($name);
     }
 
     /**
