@@ -1,6 +1,6 @@
 <?php
 
-namespace Jaxon\Cake;
+namespace Jaxon\Cake\App;
 
 use Cake\Http\Session;
 use Cake\View\View;

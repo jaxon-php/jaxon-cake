@@ -1,16 +1,15 @@
 <?php
 
-namespace Jaxon\Cake;
+namespace Jaxon\Cake\App;
 
+use Cake\Log\Log as CakeLogger;
 use Psr\Log\LoggerInterface;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
 use Psr\Log\InvalidArgumentException;
 
-use Cake\Log\Log as CakeLogger;
-
-use function ltrim;
 use function json_encode;
+use function rtrim;
 
 class Logger extends AbstractLogger implements LoggerInterface
 {

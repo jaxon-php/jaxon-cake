@@ -16,10 +16,10 @@ namespace Jaxon\Cake\Middleware;
 
 use Cake\Routing\Router;
 use Cake\Core\Configure;
-use Jaxon\Cake\CakeView;
-use Jaxon\Cake\View;
-use Jaxon\Cake\Session;
-use Jaxon\Cake\Logger;
+use Jaxon\Cake\App\CakeView;
+use Jaxon\Cake\App\View;
+use Jaxon\Cake\App\Session;
+use Jaxon\Cake\App\Logger;
 use Jaxon\Request\Handler\Psr\PsrConfigMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -60,7 +60,7 @@ class ConfigMiddleware extends PsrConfigMiddleware
         $xApp = $this->di->getApp();
 
         // Add the view renderer
-        $xApp->addViewRenderer('cakephp', '', function() {
+        $xApp->addViewRenderer('cake', '', function() {
             return new View($this->view());
         });
         // Set the session manager

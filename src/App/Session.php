@@ -1,8 +1,7 @@
 <?php
 
-namespace Jaxon\Cake;
+namespace Jaxon\Cake\App;
 
-use Cake\Utility\Hash;
 use Jaxon\App\Session\SessionInterface;
 
 class Session implements SessionInterface
@@ -22,7 +21,7 @@ class Session implements SessionInterface
     /**
      * Get the current session id
      *
-     * @return string           The session id
+     * @return string The session id
      */
     public function getId(): string
     {
@@ -32,7 +31,7 @@ class Session implements SessionInterface
     /**
      * Generate a new session id
      *
-     * @param bool          $bDeleteData         Whether to delete data from the previous session
+     * @param bool $bDeleteData Whether to delete data from the previous session
      *
      * @return void
      */
@@ -48,8 +47,8 @@ class Session implements SessionInterface
     /**
      * Save data in the session
      *
-     * @param string        $sKey                The session key
-     * @param string        $xValue              The session value
+     * @param string $sKey The session key
+     * @param string $xValue The session value
      *
      * @return void
      */
@@ -61,9 +60,9 @@ class Session implements SessionInterface
     /**
      * Check if a session key exists
      *
-     * @param string        $sKey                The session key
+     * @param string $sKey The session key
      *
-     * @return bool             True if the session key exists, else false
+     * @return bool
      */
     public function has($sKey): bool
     {
@@ -73,10 +72,10 @@ class Session implements SessionInterface
     /**
      * Get data from the session
      *
-     * @param string        $sKey                The session key
-     * @param string        $xDefault            The default value
+     * @param string $sKey The session key
+     * @param string $xDefault The default value
      *
-     * @return mixed|$xDefault             The data under the session key, or the $xDefault parameter
+     * @return mixed
      */
     public function get($sKey, $xDefault = null)
     {
@@ -86,7 +85,7 @@ class Session implements SessionInterface
     /**
      * Get all data in the session
      *
-     * @return array             An array of all data in the session
+     * @return array
      */
     public function all(): array
     {
@@ -96,7 +95,7 @@ class Session implements SessionInterface
     /**
      * Delete a session key and its data
      *
-     * @param string        $sKey                The session key
+     * @param string $sKey The session key
      *
      * @return void
      */
