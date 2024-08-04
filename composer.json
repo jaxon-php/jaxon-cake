@@ -13,7 +13,7 @@
         "source": "https://github.com/jaxon-php/jaxon-cake"
     },
     "require": {
-        "jaxon-php/jaxon-core": "v5.x-dev",
+        "jaxon-php/jaxon-core": "dev-main",
         "cakephp/cakephp": "4.*|5.*"
     },
     "autoload": {
