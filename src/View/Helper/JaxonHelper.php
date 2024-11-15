@@ -46,9 +46,9 @@ class JaxonHelper extends Helper
      *
      * @return string
      */
-    public function on(string|array $on, JsExpr $xJsExpr, array $options = []): string
+    public function on(string|array $on, JsExpr $xJsExpr): string
     {
-        return attr()->on($on, $xJsExpr, $options);
+        return attr()->on($on, $xJsExpr);
     }
 
     /**
@@ -59,9 +59,23 @@ class JaxonHelper extends Helper
      *
      * @return string
      */
-    public function click(JsExpr $xJsExpr, array $options = []): string
+    public function click(JsExpr $xJsExpr): string
     {
-        return attr()->click($xJsExpr, $options);
+        return attr()->click($xJsExpr);
+    }
+
+    /**
+     * Set an event handler
+     *
+     * @param array $on
+     * @param JsExpr $xJsExpr
+     * @param array $options
+     *
+     * @return string
+     */
+    public function event(array $on, JsExpr $xJsExpr): string
+    {
+        return attr()->event($on, $xJsExpr);
     }
 
     /**
