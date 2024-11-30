@@ -32,9 +32,9 @@ class JaxonHelper extends Helper
      *
      * @return string
      */
-    public function show(JxnCall $xJsCall, string $item = ''): string
+    public function bind(JxnCall $xJsCall, string $item = ''): string
     {
-        return attr()->show($xJsCall, $item);
+        return attr()->bind($xJsCall, $item);
     }
 
     /**
