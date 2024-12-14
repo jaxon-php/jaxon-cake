@@ -38,6 +38,18 @@ class JaxonHelper extends Helper
     }
 
     /**
+     * Attach a pagination component to a DOM node
+     *
+     * @param JxnCall $xJsCall
+     *
+     * @return string
+     */
+    public function pagination(JxnCall $xJsCall): string
+    {
+        return attr()->pagination($xJsCall);
+    }
+
+    /**
      * Set an event handler
      *
      * @param string|array $on
