@@ -3,8 +3,8 @@
 namespace Jaxon\Cake\View\Helper;
 
 use Cake\View\Helper;
+use Jaxon\Script\Call\JxnCall;
 use Jaxon\Script\JsExpr;
-use Jaxon\Script\JxnCall;
 use Jaxon\Utils\Http\UriException;
 
 use function Jaxon\attr;
@@ -52,15 +52,14 @@ class JaxonHelper extends Helper
     /**
      * Set an event handler
      *
-     * @param string|array $on
+     * @param string $event
      * @param JsExpr $xJsExpr
-     * @param array $options
      *
      * @return string
      */
-    public function on(string|array $on, JsExpr $xJsExpr): string
+    public function on(string $event, JsExpr $xJsExpr): string
     {
-        return attr()->on($on, $xJsExpr);
+        return attr()->on($event, $xJsExpr);
     }
 
     /**
@@ -77,17 +76,15 @@ class JaxonHelper extends Helper
     }
 
     /**
-     * Set an event handler
+     * Set event handlers
      *
-     * @param array $on
-     * @param JsExpr $xJsExpr
-     * @param array $options
+     * @param array $events
      *
      * @return string
      */
-    public function event(array $on, JsExpr $xJsExpr): string
+    public function event(array $events): string
     {
-        return attr()->event($on, $xJsExpr);
+        return attr()->event($events);
     }
 
     /**
